@@ -12,7 +12,7 @@
 //      4. if two or more touch points are used, the wires MUST be seperated by a cm or more along their path
 //            if the wires are too close together, they will effect one another and 'funny things' may happen 
 //      5. regarding the youtube video above, there are other ways than using relays to 'artifically touch' the touch screen.
-//            I stopped using relays after about a month of experiments.
+//            I stopped using relays after about a month of experiments. This project does NOT include relays.
 //
 //    OK let's get started
 //
@@ -29,8 +29,8 @@
 //  widely available, and marketed to secure duct seams.
 //
 //  THE WIRES
-//  Any small guage insulated wire will work. One consideration is to match the guage to the similar size that will attact to the input/output
-//  pin sockets of the arduino.
+//  Any small guage insulated wire will work. One consideration is to match the guage to a size that will attach securely to the input/output
+//  pin sockets of the arduino. Another good idea is to use many different colors of wire along the way.
 //
 //
 //  code and more instructions coming soon
