@@ -40,28 +40,31 @@
 //
 //
 //
-/********************************************************************************************
- *  +5volt                ARDUINO NANO                                                      *
- *     |                ________________                                                    *
- *   __|__             |    |      |    |                                                   *
- *  /     \            |D13 |      | D12|                                                   *
- * | LDR   |           |3V3 |______| D11|          any one of the digital                   *
- *  \____ /            |REF    /\    D10|          I/O pins can be used                     *
- *     |---------------|A0    /  \    D9|          for the touch points,                    *
- *     |               |A1   /    \   D8|          let's use pin D6                         *
- *     |               |A2   \    /   D7|                                                   *
- *     |               |A3    \  /    D6|---------------------to touch point                *
- *     |               |A4     \/     D5|                                                   *
- * resistor            |A5  ________  D4|                                                   *
- * [22Kohm]            |A6 [________] D3|                                                   *
- *     |        to     |A7  . . . .   D2|                                                   *
- *     |      +5v LDR--|5V  * * * *  GND|------------connect this to the ground of the iPad *
- *     |               |RST          RST|            (see notation, use headphone socket)   *
- *     ----------------|GND  o o o   RX0|                                                   *
- * (optional LDR)      |VIN  o o o   TX1|                                                   *
- *                     |________________|                                                   *
- *                                                                                          *
- *******************************************************************************************/
+/**************************************************************************************************
+                                                                                                  *
+                                                                                                  *
+       +5volt______          ARDUINO NANO                                                         *
+          |        |       ________________                                                       *
+        __|__      |      |    |      |    |                                                      *
+       /     \     |      |D13 |      | D12|                                                      *
+      | LDR   |    |      |3V3 |______| D11|          any one of the digital                      *
+       \____ /     ^      |REF    /\    D10|          I/O pins can be used                        *
+          |---------------|A0    /  \    D9|          for the touch points,                       *
+          |        ^      |A1   /    \   D8|          let's use pin D6                            *
+          |        |      |A2   \    /   D7|                                                      *
+          |        |      |A3    \  /    D6|---------------------to touch point                   *
+          |        |      |A4     \/     D5|                                                      *
+      resistor     |      |A5  ________  D4|                                                      *
+      [22Kohm]     |      |A6 [________] D3|                                                      *
+          |        to     |A7  . . . .   D2|                                                      *
+          |      +5v LDR--|5V  * * * *  GND|------------connect this to the ground of the iPad    *
+          |               |RST          RST|            (see notation, use headphone socket)      *
+          ----------------|GND  o o o   RX0|                                                      *
+    (optional LDR)        |VIN  o o o   TX1|                                                      *
+                          |________________|                                                      *
+                                                                                                  *
+                                                                                                  *
+ *************************************************************************************************/
 //
 //  code and more instructions coming soon
 //
