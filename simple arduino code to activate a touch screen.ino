@@ -11,8 +11,9 @@
 //      3. The wires should be insulated.
 //      4. If two or more touch points are used, the wires MUST be seperated by a cm or more along their path.
 //            If the wires are too close together, they will effect one another and 'funny things' may happen.
-//      5. Regarding the youtube video above, there are other ways than using relays to 'artifically touch' the touch screen.
-//            I stopped using relays after about a month of experiments. This project does NOT include relays.
+//
+// Regarding the youtube video above, there are other ways than using relays to 'artifically touch' the touch screen.
+//      I stopped using relays after about a month of experiments. This project does NOT include relays.
 //
 //    OK let's get started
 //
