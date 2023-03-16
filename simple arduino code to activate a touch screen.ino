@@ -20,7 +20,7 @@
 //  MATERIALS NEEDED
 //      CONTROLLER (Arduino)
 //      TOUCH POINT tape
-//      WIRE
+//      WIRES
 //      GROUNDING WIRE
 //      LIGHT SENSOR (LDR light dependand resistor) optional for the more advanced operation.
 //
