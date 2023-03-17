@@ -40,31 +40,77 @@
 //
 //
 //
-/**************************************************************************************************
-                                                                                                  *
-                                                                                                  *
-       +5volt______          ARDUINO NANO                                                         *
-          |        |       ________________                                                       *
-        __|__      |      |    |      |    |                                                      *
-       /     \     |      |D13 |      | D12|                                                      *
-      | LDR   |    |      |3V3 |______| D11|          any one of the digital                      *
-       \____ /     ^      |REF    /\    D10|          I/O pins can be used                        *
-          |---------------|A0    /  \    D9|          for the touch points,                       *
-          |        ^      |A1   /    \   D8|          let's use pin D6                            *
-          |        |      |A2   \    /   D7|                                                      *
-          |        |      |A3    \  /    D6|---------------------to touch point                   *
-          |        |      |A4     \/     D5|                                                      *
-      resistor     |      |A5  ________  D4|                                                      *
-      [22Kohm]     |      |A6 [________] D3|                                                      *
-          |        to     |A7  . . . .   D2|                                                      *
-          |      +5v LDR--|5V  * * * *  GND|------------connect this to the ground of the iPad    *
-          |               |RST          RST|            (see notation, use headphone socket)      *
-          ----------------|GND  o o o   RX0|                                                      *
-    (optional LDR)        |VIN  o o o   TX1|                                                      *
-                          |________________|                                                      *
-                                                                                                  *
-                                                                                                  *
- *************************************************************************************************/
+/**************************************************************************************************************************************************************
+                                                                                                                                                     
+                                                                                                                                                     
+       +5volt______          ARDUINO NANO                                                                                                           
+          |        |       ________________           any one of the digital                                          iPad (not to scale)               
+        __|__      |      |    |      |    |          pins will work                                         _______________________________________  
+       /     \     |      |D13 |      | D12|          Let's use pin 9 (D9)                                 |                                        |
+      | LDR   |    |      |3V3 |______| D11|          to connect to the                                    |                             ____       |
+       \____ /     ^      |REF    /\    D10|          touch point (TP)                                     |                            | TP |      |
+          |---------------|A0    /  \    D9|--------------------------------------------------------------------------------------------|____|      |
+          |        ^      |A1   /    \   D8|                                                               |                                        |
+          |        |      |A2   \    /   D7|                                                               |                        ___             |
+          |        |      |A3    \  /    D6|                                                               |                       /   \            |
+          |        |      |A4     \/     D5|                                                               |              optional| LDR |           |
+      resistor     |      |A5  ________  D4|                                                               |                       \___/            |
+      [22Kohm]     |      |A6 [________] D3|                                                               |                                        |
+          |        to     |A7  . . . .   D2|                                                               |                                        |
+          |      +5v LDR--|5V  * * * *  GND|------------connect this to the ground of the iPad-------------|Headphone socket                        |
+          |               |RST          RST|            (see notation, use headphone socket)               |________________________________________|
+          ----------------|GND  o o o   RX0|                                                                                                         
+    (optional LDR)        |VIN  o o o   TX1|                                                                                                         
+                          |________________|                                                                                                         
+                                                                                                                                                     
+                                                                                                                                                      
+ *************************************************************************************************************************************************************/
 //
-//  code and more instructions coming soon
+//  The theory behind this process is to use pin 9 to trigger the 'touch'.
+//  Pin 9 will alternate between an input and output.
+//  When pin 9 is set as an input, it is 'listening' for a low signal (ground) to a high signal (+5volts) and will appear 'passive' to the touch screen.
+//  When pin 9 is set as an output, the digitalWrite(9,LOW) indicates that the output will be grounded and the touch screen will act as if the
+//      'touch point' has been grounded thru the arduino to the ground of the headphone jack.
+//  After the 'touch' process, pin 9 is changed back to an input and the touch point on the screen will not be grounded.
+//  There is a built in LED on pin 13, so if using this, avoid using pin 13.
+//  The LED is used for troubleshooting and as an indicator when there is a 'touch'
 //
+
+
+
+int Touch_Time = 80;             // set this to the amount of time in miliseconds
+int Interval = 5000;             // set this to the amount of time in miliseconds 5000 is 5 seconds
+int LDR_value;                   // this is used as a brightness threshold for where the LDR is placed on the touch screen 
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);    // built in LED is set to pim 13
+  digitalWrite(LED_BUILTIN,LOW);   // LOW indicates 0volts (grounded)
+  digitalWrite(9,LOW);             // LOW indicates 0volts (grounded), when this pin is set as an output pin, it will be grounded
+  pinMode(9,INPUT);                // When this pin is set as an input pin, it is not grounded
+  LDR_value = analogRead(A0)+50;   // This sets the value read by pin A0 to just a bit higher threshold
+}
+
+void loop() {
+  Touch_Screen();                   // initiat the touch process
+  while (analogRead(A0)>=(LDR_value) {    // this while loop is another way to pause untill the LDR pin (A0) observes a lower value than LDR_value
+                                          // let's say that the touch point is placed to refresh the screen and after refreshing the screen, the screen goes   
+    }                                     // very bright untill it is refreshed. this will delay untill the screen is dark again (fully refreshed)
+  delay(Interval);                  // wait this amount of time before repeating this loop
+  
+}
+
+void Touch_Screen(){              // this is the actual 'touch' process
+  digitalWrite(LED_BUILTIN,HIGH); // turn ON the built in LED
+  pinMode(9,OUTPUT);              // ground out this pin (touch the screen) 
+  delay(Touch_Time);              // for this amount of time
+  pinMode(9,INPUT);               // set this pin to listen and not be grounded (stop touching the screen)
+  digitalWrite(LED_BUILTIN,LOW);  // turn OFF the built in LED
+}
+
+
+  
+  
+  
+  
+  
+  
