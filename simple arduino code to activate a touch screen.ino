@@ -29,14 +29,14 @@
 //
 //  THE TOUCH POINTS
 //  The touch point pads I have found to be the most effective, are made from aluminium adhesive tape. This adhesive is very inexpensive, 
-//  widely available, and marketed to secure duct seams.
+//  widely available, and marketed to secure duct seams. The wire to pin 9 should be connected to this by some means.
 //
 //  THE WIRES
 //  Any small guage insulated wire will work. One consideration is to match the guage to a size that will attach securely to the input/output
 //  pin sockets of the arduino. Another good idea is to use many different colors of wire along the way.
 //
 //  GROUNDING WIRE
-//  This can be an 1/8th inch headphone cable from a scavenged wired ear bud 
+//  This can be an 1/8th inch headphone plug cable from a scavenged wired ear bud. Use the wire connected to the ground on the plug. 
 //
 //
 //
@@ -44,7 +44,7 @@
                                                                                                                                                      
                                                                                                                                                      
        +5volt______          ARDUINO NANO                                                                                                           
-          |        |       ________________           any one of the digital                                          iPad (not to scale)               
+          |        |       ________________           any one of the digital                                          iPad (not to scale)    TP=touch point           
         __|__      |      |    |      |    |          pins will work                                         _______________________________________  
        /     \     |      |D13 |      | D12|          Let's use pin 9 (D9)                                 |                                        |
       | LDR   |    |      |3V3 |______| D11|          to connect to the                                    |                             ____       |
@@ -68,18 +68,20 @@
 //
 //  The theory behind this process is to use pin 9 to trigger the 'touch'.
 //  Pin 9 will alternate between an input and output.
-//  When pin 9 is set as an input, it is 'listening' for a low signal (ground) to a high signal (+5volts) and will appear 'passive' to the touch screen.
+//  When pin 9 is set as an input, it is 'listening' for a voltage and will appear 'passive' to the touch screen.
 //  When pin 9 is set as an output, the digitalWrite(9,LOW) indicates that the output will be grounded and the touch screen will act as if the
 //      'touch point' has been grounded thru the arduino to the ground of the headphone jack.
 //  After the 'touch' process, pin 9 is changed back to an input and the touch point on the screen will not be grounded.
 //  There is a built in LED on pin 13, so if using this, avoid using pin 13.
 //  The LED is used for troubleshooting and as an indicator when there is a 'touch'
 //
+//  Experiment with the values untill the system works for you 
+//
 
 
 
-int Touch_Time = 80;             // set this to the amount of time in miliseconds
-int Interval = 5000;             // set this to the amount of time in miliseconds 5000 is 5 seconds
+int Touch_Time = 80;             // set this to the amount of time in miliseconds, and should be catered to your needs
+int Delay_Interval = 5000;       // set this to the amount of time in miliseconds 5000 is 5 seconds
 int LDR_value;                   // this is used as a brightness threshold for where the LDR is placed on the touch screen 
 
 void setup() {
@@ -87,15 +89,15 @@ void setup() {
   digitalWrite(LED_BUILTIN,LOW);   // LOW indicates 0volts (grounded)
   digitalWrite(9,LOW);             // LOW indicates 0volts (grounded), when this pin is set as an output pin, it will be grounded
   pinMode(9,INPUT);                // When this pin is set as an input pin, it is not grounded
-  LDR_value = analogRead(A0)+50;   // This sets the value read by pin A0 to just a bit higher threshold
+  LDR_value = analogRead(A0)+50;   // This adds 50 to the value read be pin A0 just to raise the threshold a bit (change this to your needs)
 }
 
 void loop() {
-  Touch_Screen();                   // initiat the touch process
+  Touch_Screen();                         // initiat the touch process
   while (analogRead(A0)>=(LDR_value) {    // this while loop is another way to pause untill the LDR pin (A0) observes a lower value than LDR_value
                                           // let's say that the touch point is placed to refresh the screen and after refreshing the screen, the screen goes   
     }                                     // very bright untill it is refreshed. this will delay untill the screen is dark again (fully refreshed)
-  delay(Interval);                  // wait this amount of time before repeating this loop
+  delay(Delay_Interval);                  // wait this amount of time before repeating this loop
   
 }
 
