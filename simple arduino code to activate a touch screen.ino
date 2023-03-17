@@ -97,7 +97,7 @@ void loop() {
   while (analogRead(A0)>=(LDR_value) {    // this while loop is another way to pause untill the LDR pin (A0) observes a lower value than LDR_value
                                           // let's say that the touch point is placed to refresh the screen and after refreshing the screen, the screen goes   
     }                                     // very bright untill it is refreshed. this will delay untill the screen is dark again (fully refreshed)
-  delay(Delay_Interval);                  // wait this amount of time before repeating this loop
+  delay(Delay_Interval);                  // wait this amount of time before repeating this loop. This is usefull if the while loop conditions cause no delay
   
 }
 
